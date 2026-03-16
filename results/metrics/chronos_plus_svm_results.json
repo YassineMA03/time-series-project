@@ -3,7 +3,7 @@
   "accuracy": 0.6618004866180048,
   "f1_weighted": 0.6103333461967894,
   "feature_dim": 9216,
-  "training_seconds": 50.505099058151245,
+  "training_seconds": 50.83541917800903,
   "report": {
     "15": {
       "precision": 0.8,
