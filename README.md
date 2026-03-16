@@ -15,9 +15,6 @@
 5. [Repository Structure](#repository-structure)
 6. [Installation](#installation)
 7. [Usage](#usage)
-8. [Design Decisions & Hyperparameter Rationale](#design-decisions--hyperparameter-rationale)
-9. [Limitations & Future Work](#limitations--future-work)
-10. [References](#references)
 
 ---
 
