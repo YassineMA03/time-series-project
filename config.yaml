@@ -1,0 +1,52 @@
+# config.yaml
+# ===========
+# Centralised hyperparameter configuration for LSST TSC experiments.
+#
+# Pass to compare.py or individual train scripts via --config config.yaml
+# (config loading is handled by the scripts themselves; values here document
+#  the defaults used in all reported experiments).
+#
+# Usage:
+#   python compare.py                        # uses argparse defaults
+#   # Edit this file and re-run to reproduce a specific experiment setup.
+
+# ── General ──────────────────────────────────────────────────────────────────
+seed: 42
+results_dir: "results"
+
+# ── Data ─────────────────────────────────────────────────────────────────────
+dataset: "LSST"
+val_split: 0.15          # fraction of train set held out for validation
+normalise: true          # instance-wise z-score normalisation
+
+# ── Experiment A: BaselineFCN ─────────────────────────────────────────────────
+fcn:
+  epochs: 300
+  batch_size: 64
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  label_smoothing: 0.1
+  class_weighting: "sqrt_inv_freq"   # options: sqrt_inv_freq | inv_freq | none
+  warmup_fraction: 0.05              # fraction of total steps used for LR warmup
+  patience: 40                       # early stopping patience (val weighted F1)
+  grad_clip: 1.0
+
+  architecture:
+    conv1_filters: 128
+    conv1_kernel:  8
+    conv2_filters: 256
+    conv2_kernel:  5
+    conv3_filters: 128
+    conv3_kernel:  3
+
+# ── Experiment B: Chronos + SVM ───────────────────────────────────────────────
+chronos:
+  model: "amazon/chronos-t5-small"
+  batch_size: 128                    # inference batch size for embedding extraction
+  pooling: ["mean", "max", "std"]    # temporal pooling operators concatenated
+
+  svm:
+    kernel: "rbf"
+    C: 10
+    gamma: "scale"
+    class_weight: "balanced"

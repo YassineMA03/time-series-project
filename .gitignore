@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Experiment outputs (large files)
+results/checkpoints/*.pt
+results/figures/
+
+# Data cache
+~/.cache/huggingface/
+.venv/
